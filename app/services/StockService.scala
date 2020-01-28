@@ -11,7 +11,7 @@ abstract class StockService {
 }
 
 object StockService {
-  def getFutureSingleQuote(symbol: String): Future[Object] =
+  def getFutureSingleQuote(symbol: String): Future[Either[String, BigDecimal]] =
     Future {
       val quoteContent: Either[String, BigDecimal] =
         try {
@@ -19,9 +19,6 @@ object StockService {
         } catch {
           case e: Exception => Left(e.getMessage)
         }
-      quoteContent match {
-        case Left(msg)    => msg
-        case Right(price) => MyStock(symbol, price)
-      }
+      quoteContent
     }
 }
