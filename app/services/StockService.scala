@@ -66,8 +66,12 @@ object StockService {
 
   private val jsonSink: Sink[JsValue, Future[Done]] = Sink.foreach { json =>
     val symbol = (json \ "symbol").as[String]
-    if (symbol == "resetAllSymbols") {
-      val keySet = collection.immutable.Set(stocksSwitchMap.keys.toSeq: _*)
+    val reset = (json \ "reset").as[String]
+    if (!reset.isEmpty) {
+      val keySet =
+        if (reset == "resetAllSymbols")
+          collection.immutable.Set(stocksSwitchMap.keys.toSeq: _*)
+        else Set(reset)
       unwatchStocks(keySet)
     } else
       addStocks(Set(symbol))

@@ -4,30 +4,22 @@ $ ->
     message = JSON.parse event.data
     switch message.type
       when "addStock"
-            addStockQuoteCard(message)
-            console.log(message)
+            addStockQuoteCard(message, ws)
       else
         console.log(message)
 
   $("#addsymbolform").submit (event) ->
     event.preventDefault()
-    ws.send(JSON.stringify({symbol: $("#addsymboltext").val()}))
+    ws.send(JSON.stringify({symbol: $("#addsymboltext").val(), reset:""}))
     # reset the form
     $("#addsymboltext").val("")
 
-  $("#resetSymbols").submit (event) ->
-      event.preventDefault()
-      ws.send(JSON.stringify({symbol: "resetAllSymbols"}))
-      # reset the form
-      $("#addsymboltext").val("")
-
-
-removeStock = (container) ->
+removeStock = (container, ws, symbol) ->
   if (container.hasClass("card-holder"))
     container.remove()
-    ws.send(JSON.stringify({symbol: $("#addsymboltext").val()}))
+    ws.send(JSON.stringify({symbol:"", reset:symbol}))
 
-addStockQuoteCard = (message) ->
+addStockQuoteCard = (message, ws) ->
   if ($("#" + message.symbol).size() > 0)
     $("#" + message.symbol+"-price").html("$ " +message.price)
   else
@@ -36,6 +28,6 @@ addStockQuoteCard = (message) ->
    remove = $("<div>").addClass("remove").text("Remove")
    card = $("<div>").addClass("card").prop("id", message.symbol).append(symbol, price, remove)
    cardHolder = $("<div>").addClass("card-holder").prop("id", message.symbol).append(card).click (event) ->
-     removeStock($(this))
+     removeStock($(this), ws, message.symbol)
 
    $("#stocks").prepend(cardHolder)
