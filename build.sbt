@@ -13,6 +13,9 @@ libraryDependencies += ws
 libraryDependencies += "org.scalatestplus.play" %% "scalatestplus-play" % "5.0.0" % Test
 libraryDependencies += "com.yahoofinance-api" % "YahooFinanceAPI" % "3.15.0"
 
+libraryDependencies += "org.webjars" % "flot" % "0.8.3-1"
+libraryDependencies += "org.webjars" % "bootstrap" % "3.3.6"
+
 // Adds additional packages into Twirl
 //TwirlKeys.templateImports += "yunhu.controllers._"
 
