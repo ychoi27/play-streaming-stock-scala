@@ -3,30 +3,33 @@ package models
 import akka.NotUsed
 import akka.stream.ThrottleMode
 import akka.stream.scaladsl.Source
-import play.api.libs.json._
 import play.api.libs.functional.syntax._
-import services.StockService
+import play.api.libs.json._
+import yahoofinance.YahooFinance
+
 import scala.concurrent.duration._
 
-import scala.concurrent.ExecutionContext.Implicits.global
-
 case class Stock(symbol: String) {
-  private val source: Source[MyStock, NotUsed] =
-    Source.future {
-      StockService.getFutureSingleQuote(symbol).map {
-        case Right(stock) => stock: MyStock
-      }
+  private val source =
+    Source.unfold(
+      MyStock(symbol, YahooFinance.get(symbol).getQuote(true).getPrice)
+    ) { last: MyStock =>
+      val next =
+        MyStock(symbol, YahooFinance.get(symbol).getQuote(true).getPrice)
+      Some(next, next)
     }
 
   def update: Source[StockUpdate, NotUsed] = {
     source
       .throttle(
         elements = 1,
-        per = 1000.millis,
+        per = 200.millis,
         maximumBurst = 1,
         ThrottleMode.shaping
       )
-      .map(sq => new StockUpdate(sq.symbol, sq.price))
+      .map { sq =>
+        new StockUpdate(sq.symbol, sq.price)
+      }
   }
 }
 
@@ -52,7 +55,7 @@ object StockUpdate {
   implicit val stockUpdateWrites: Writes[StockUpdate] =
     (update: StockUpdate) =>
       Json.obj(
-        "type" -> "stockupdate",
+        "type" -> "addStock",
         "symbol" -> update.symbol,
         "price" -> update.price
     )

@@ -2,16 +2,15 @@ package controllers
 
 import akka.NotUsed
 import akka.stream.scaladsl.Flow
+import akka.util.Timeout
 import javax.inject._
-import models.MyStock
 import play.api.libs.json.{JsValue, Json}
 import play.api.mvc._
 import services.StockService
-import akka.util.Timeout
-import scala.concurrent.duration._
 
-import scala.concurrent.Future
 import scala.concurrent.ExecutionContext.Implicits.global
+import scala.concurrent.Future
+import scala.concurrent.duration._
 
 /**
   * This controller creates an `Action` to handle HTTP requests to the
