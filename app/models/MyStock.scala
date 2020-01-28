@@ -23,7 +23,7 @@ case class Stock(symbol: String) {
     source
       .throttle(
         elements = 1,
-        per = 200.millis,
+        per = 75.millis,
         maximumBurst = 1,
         ThrottleMode.shaping
       )
