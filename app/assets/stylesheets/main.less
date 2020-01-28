@@ -18,7 +18,9 @@
 
 
 body {
-  margin-top: 50px;
+    padding: 24px;
+    background-color: #333;
+    margin-top: 50px;
 }
 
 .flip-container {
@@ -32,93 +34,26 @@ body {
   }
 }
 
-.flipper {
-  height: 250px;
-
-  background-color: #fafafa;
-  border: 1px solid #ddd;
-  
-  .border-radius(4px);
-  
-  cursor: hand;
-  cursor: pointer;
-
-  -webkit-transition: 0.6s;
-  -moz-transition: 0.6s;
-  transition: 0.6s;
-  
-  -webkit-transform-style: preserve-3d;
-  -moz-transform-style: preserve-3d;
-  transform-style: preserve-3d;
-  
-  &:after {
-    content: attr(data-content);
-    position: absolute;
-    top: -1px;
-    left: -1px;
-    padding: 3px 7px;
-    font-size: 12px;
-    font-weight: bold;
-    background-color: #ffffff;
-    border: 1px solid #ddd;
-    color: #9da0a4;
-
-    .border-radius(4px 0 4px 0);
-  }
+.container {
+    display: flex;
 }
 
-.chart-holder, .details-holder {
-  position: absolute;
-  width: 100%;
-  height: 250px;
-  top: 0px;
-  left: 0px;
-
-  -webkit-backface-visibility: hidden;
-  -moz-backface-visibility: hidden;
-  backface-visibility: hidden;
+.card-holder {
+        width: 100px;
+        background: #424242;
+        border-radius: 8px;
+        padding: 15px;
+        font-size: 1.5rem;
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        font-weight: 400;
+        line-height: 1.334;
+        letter-spacing: 0em;
+        margin: 15px;
+        color: #fff;
+            box-shadow: 0px 2px 1px -1px rgba(0,0,0,0.2), 0px 1px 1px 0px rgba(0,0,0,0.14), 0px 1px 3px 0px rgba(0,0,0,0.12);
 }
 
-.chart-holder {
-  z-index: 2;
-  & p {
-    position: absolute;
-    bottom: 7px;
-    right: 20px;
-    font-size: 10px;
-    color: #aaaaaa;
-    font-style: italic;
-  }
-}
-
-.details-holder {
-  .transform(180deg);
-  text-align: center;
-  z-index: 1;
-  & h4 {
-    padding: 20px;
-  }
-  & .progress {
-    padding: 20px;
-    background: none;
-    border: none;
-
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-  }
-  & img {
-    height: 128px;
-    width: 128px;
-  }
-}
-
-.chart {
-  position: relative;
-  width: 920px;
-  height: 210px;
-  margin-top: 30px;
-  margin-bottom: 10px;
-  margin-left: 10px;
-  margin-right: 10px;
+.remove {
+    color: #90caf9;
+    cursor: pointer;
 }

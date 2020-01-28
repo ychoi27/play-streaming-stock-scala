@@ -12,13 +12,13 @@
   <script type='text/javascript' src='@routes.Assets.at("javascripts/index.js")'></script>
 </head>
 <body data-ws-url="@routes.HomeController.socket.webSocketURL()">
-<div class="navbar navbar-inverse navbar-fixed-top">
+<div>
   <div class="navbar-inner">
     <div class="container">
-      <a class="brand" href="#">Clutch Exercise</a>
       <form id="addsymbolform" class="navbar-form pull-right">
         <input id="addsymboltext" type="text" class="span2" placeholder="SYMBOL">
         <button type="submit" class="btn">Add Stock</button>
+        <button id="resetSymbols" type="submit" class="btn">Reset</button>
       </form>
     </div>
   </div>
