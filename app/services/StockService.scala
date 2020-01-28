@@ -17,7 +17,10 @@ object StockService {
         try {
           Right(YahooFinance.get(symbol).getQuote(true).getPrice)
         } catch {
-          case e: Exception => Left(e.getMessage)
+          case e: NullPointerException => Left("NullPointerException Caught")
+          case e: Exception => {
+            Left(e.getMessage)
+          }
         }
       quoteContent
     }

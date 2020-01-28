@@ -30,8 +30,8 @@ class HomeController @Inject()(val controllerComponents: ControllerComponents)
 
   def getSingleQuote(symbol: String) = Action.async {
     StockService.getFutureSingleQuote(symbol).map {
-      case Right(price)       => Ok(Json.toJson(MyStock(symbol, price)))
-      case Left(errorMessage) => BadRequest(errorMessage)
+      case Right(price)  => Ok(Json.toJson(MyStock(symbol, price)))
+      case Left(message) => BadRequest(message)
     }
   }
 
