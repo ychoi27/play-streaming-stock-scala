@@ -21,4 +21,4 @@ This is a simple application for watching a stock quote in real time. Scala, Pla
    To delete the card, just click the Remove button.   
    Finally, the real time data is available during trading hours.
 
-![Image description](/play-streaming-stock-scala/public/images/image.png)
+![Image description](https://github.com/ychoi27/play-streaming-stock-scala/blob/master/public/images/image.png)
